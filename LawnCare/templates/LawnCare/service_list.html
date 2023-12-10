@@ -1,15 +1,27 @@
 {% extends "LawnCare/base.html" %}
 {% block content %}
- <h1>Services Provided by CS Lawn Care</h1>
+    <div class="text-center">
+        <h1>Services</h1>
+    </div>
     {% if service_list %}
-        <table class="table table-bordered">
+        <div class="row container-fluid p-5">
             {% for service in service_list %}
-                <tr class="table-secondary">
-                    <td><a href="{{ service.get_absolute_url }}">{{ service.serv_title }}</a></td>
-                </tr>
+                <div class="col-md-4">
+                    <div class="service-item text-center">
+                        {% if service.service_img %}
+                            <div class="image-container">
+                            <!-- TODO: Change image dimensions to a square -->
+                                <img src="{{ service.service_img.url }}" class="img-fixed"
+                                     alt="{{ service.service_title }}">
+                            </div>
+                        {% endif %}
+                        <h4 class="service-title">{{ service.service_title }}</h4>
+                        <a href="{{ service.get_absolute_url }}" class="btn btn-primary">{{ service.serv_title }}</a>
+                    </div>
+                </div>
             {% endfor %}
+        </div>
     {% else %}
         <p>There are no services</p>
     {% endif %}
-        </table>
 {% endblock %}
